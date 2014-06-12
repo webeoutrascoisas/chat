@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<body>
+    <div>
+        <input type="button" id="btnSayHello" value="Dizer oi pro servidor"/>
+    </div>
+    <script src="~/Scripts/jquery-1.6.4.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.0.3.js"></script>
+    <script src="~/signalr/hubs"></script>
+    
+    <script type="text/javascript">
+        $(function() {
+            var chat = $.connection.chatHub;
+
+            chat.client.hello = function() {
+                window.alert("O servidor disse oi para mim!!");
+            };
+
+            $.connection.hub.start().done(function () {
+                console.log("Conexão inciada com sucesso!");
+            });
+
+            $('#btnSayHello').click(function() {
+                chat.server.hello();
+            });
+
+        });
+    </script>
+</body>
+</html>
