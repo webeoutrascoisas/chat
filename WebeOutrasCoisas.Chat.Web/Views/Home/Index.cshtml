@@ -1,22 +1,25 @@
-﻿@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Index</title>
-</head>
-<body>
-    <div>
+﻿<div class="row">
+    <div class="col-sm-12">
+        <p>
+            <h1>Entrar no Chat</h1>
+            Bem-vindo ao chat do Web e Outras Coisas!
+        </p>
+        <p>
+            Para entrar é simples! Bastar colocar o seu nome e clicar em "Entrar no Chat"
+        </p>
+    </div>
+</div>
+<div class="row">&nbsp;</div>
+<div class="row">
+    <div class="col-sm-12">
         @using (Html.BeginForm("SignIn", "Home"))
         {
-            <label for="nome">
-                Nome: <input type="text" name="nome" />
-            </label>
-            <input type="submit" value="Entrar no Chat" />
+            <div class="form-group form-inline">
+                <input type="text" name="nome" class="form-control" placeholder="Nome" />
+                <input type="submit" value="Entrar no Chat" class="btn btn-default" />
+            </div>
         }
     </div>
-</body>
-</html>
+</div>
+
+

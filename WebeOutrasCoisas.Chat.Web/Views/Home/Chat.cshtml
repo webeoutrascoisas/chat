@@ -1,22 +1,19 @@
-﻿@{
-    Layout = null;
-}
-
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>Chat</title>
-</head>
-<body>
-    <div style="width: 500px; height: 350px; overflow-x:hidden; overflow-y:visible;" id="chat">
+﻿<div class="row">
+    <div style="width: 100%; height: 350px; overflow-x:hidden; overflow-y:visible;" id="chat">
         <ul id="chatList"></ul>
     </div>
-    <textarea id="message" cols="45" rows="3"></textarea>
-    <input type="button" id="btnSendMessage" value="Enviar mensagem" />
+</div>
+<div class="row">&nbsp;</div>
+<div class="row">
+    <div class="form-group">
+        <textarea id="message" cols="45" rows="3" class="form-control" placeholder="Digite sua mensagem e aperte Enter para enviar. Se preferir, use o botão."></textarea>
+        <input type="button" id="btnSendMessage" value="Enviar mensagem" class="btn btn-default" />
+    </div>
+</div>
 
-    <script src="~/Scripts/jquery-1.6.4.js"></script>
+@section scripts
+{
+    <script src="~/Scripts/jquery-1.10.2.js"></script>
     <script src="~/Scripts/jquery.signalR-2.0.3.js"></script>
     <script src="~/signalr/hubs"></script>
 
@@ -26,6 +23,7 @@
 
             chat.client.receiveMessage = function (message) {
                 $('#chatList').append('<li>' + message + '</li>');
+                $("#chat").scrollTop($("#chat")[0].scrollHeight);
             };
 
             $.connection.hub.start().done(function () {
@@ -36,9 +34,14 @@
                 chat.server.sendMessage($('#message').val());
                 $('#chatList').append('<li>Eu: ' + $('#message').val() + '</li>');
                 $('#message').val('');
+                $("#chat").scrollTop($("#chat")[0].scrollHeight);
+            });
+
+            $("#message").on("keyup", function (e) {
+                if (e.which == 13)
+                    $('#btnSendMessage').trigger("click");
             });
 
         });
     </script>
-</body>
-</html>
+}

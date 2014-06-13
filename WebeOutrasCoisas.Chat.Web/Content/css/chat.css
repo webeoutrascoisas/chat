@@ -1,0 +1,13 @@
+﻿/* prefixo main indica a cor mais forte, usada no header e footer*/
+body {
+  background-color: #f2f2f2;
+}
+.header {
+  background-color: #363636;
+  color: #ffffff;
+}
+.footer {
+  background-color: #363636;
+  color: #ffffff;
+}
+/*# sourceMappingURL=chat.css.map */
