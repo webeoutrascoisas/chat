@@ -124,6 +124,7 @@
     <Content Include="packages.config" />
     <None Include="Properties\PublishProfiles\WebeOutrasCoisasChat.pubxml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Chat.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

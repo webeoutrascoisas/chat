@@ -1,0 +1,44 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Chat</title>
+</head>
+<body>
+    <div style="width: 500px; height: 350px; overflow-x:hidden; overflow-y:visible;" id="chat">
+        <ul id="chatList"></ul>
+    </div>
+    <textarea id="message" cols="45" rows="3"></textarea>
+    <input type="button" id="btnSendMessage" value="Enviar mensagem" />
+
+    <script src="~/Scripts/jquery-1.6.4.js"></script>
+    <script src="~/Scripts/jquery.signalR-2.0.3.js"></script>
+    <script src="~/signalr/hubs"></script>
+
+    <script type="text/javascript">
+        $(function () {
+            var chat = $.connection.chatHub;
+
+            chat.client.receiveMessage = function (message) {
+                $('#chatList').append('<li>' + message + '</li>');
+            };
+
+            $.connection.hub.start().done(function () {
+                console.log("Conexão inciada com sucesso!");
+            });
+
+            $('#btnSendMessage').click(function () {
+                chat.server.sendMessage($('#message').val());
+                $('#chatList').append('<li>Eu: ' + $('#message').val() + '</li>');
+                $('#message').val('');
+            });
+
+        });
+    </script>
+</body>
+</html>

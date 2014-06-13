@@ -4,9 +4,10 @@ namespace WebeOutrasCoisas.Chat.Web.Hubs
 {
     public class ChatHub : Hub
     {
-        public void Hello()
+        [Authorize]
+        public void SendMessage(string message)
         {
-            Clients.Caller.hello();
+            Clients.Others.receiveMessage(Context.User.Identity.Name + ": " + message);
         }
     }
 }

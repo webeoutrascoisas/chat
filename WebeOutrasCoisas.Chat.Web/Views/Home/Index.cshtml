@@ -10,29 +10,13 @@
 </head>
 <body>
     <div>
-        <input type="button" id="btnSayHello" value="Dizer oi pro servidor"/>
+        @using (Html.BeginForm("SignIn", "Home"))
+        {
+            <label for="nome">
+                Nome: <input type="text" name="nome" />
+            </label>
+            <input type="submit" value="Entrar no Chat" />
+        }
     </div>
-    <script src="~/Scripts/jquery-1.6.4.js"></script>
-    <script src="~/Scripts/jquery.signalR-2.0.3.js"></script>
-    <script src="~/signalr/hubs"></script>
-    
-    <script type="text/javascript">
-        $(function() {
-            var chat = $.connection.chatHub;
-
-            chat.client.hello = function() {
-                window.alert("O servidor disse oi para mim!!");
-            };
-
-            $.connection.hub.start().done(function () {
-                console.log("Conexão inciada com sucesso!");
-            });
-
-            $('#btnSayHello').click(function() {
-                chat.server.hello();
-            });
-
-        });
-    </script>
 </body>
 </html>
